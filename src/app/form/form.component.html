@@ -1,0 +1,30 @@
+<div class="row d-flex justify-content-center bd-highlight">
+  <form class="col-6 text-center border border-primar needs-validation" (ngSubmit)="onSubmit()" #form="ngForm">
+  <h5 class="my-4">Добавить пользователя</h5>
+  <div class="d-flex justify-content-center bd-highlight row mb-3">
+    <div class="col-sm-10 form-group">
+      <input
+      type="text"
+      required
+      name="username"
+      placeholder="Имя"
+      [(ngModel)]="user.name"
+      #name="ngModel"
+      class="form-control">
+    </div>
+    <div [hidden]="name.valid || name.untouched" class="col-sm-9 alert alert-danger">
+      Не указано имя
+    </div>
+    </div>
+      <div class="row d-flex justify-content-around bd-highlight mb-3">
+        <label for="content" class="form-label">Любимые передачи</label>
+        <div class="col-sm-10">
+        <select class="form-select" multiple aria-label="select content" name="user.favorite_content_Id" [(ngModel)]="user.favorite_content_id">
+          <option *ngFor="let content of contents; index as i"  [value]="content.favorite_content_id">{{content.name}}</option>
+        </select>
+        </div>
+      </div>
+    <div *ngIf="error" class="text-danger mb-3">Ошибка сети</div> 
+    <button type="submit" class="mb-4 btn btn-primary" [disabled]="name.invalid || isSending">Добавить</button>
+  </form>
+</div>

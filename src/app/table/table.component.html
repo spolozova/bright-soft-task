@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row align-items-center">
+      <div class="row">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Имя</th>
+              <th scope="col">Любимый телеканал</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ user.name }}</td>
+              <td *ngIf="user.favorite_channels">{{ user.favorite_channels.join(', ') }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <app-form [users]="users"></app-form>
+  </div>
