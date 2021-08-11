@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { User, UsersService } from '../shared/users.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Data } from '../shared/users.service';
 
 
 @Component({
@@ -9,15 +9,12 @@ import { User, UsersService } from '../shared/users.service';
 })
 
 export class TableComponent implements OnInit {
-  users: User[] = [];
-
-  constructor(
-    private usersService: UsersService
-  ) {}
+  @Input() data: Data = {
+    users: [],
+    contents: [],
+    channels: [],
+  }
 
   ngOnInit(): void {
-    this.usersService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
-    })
   }
 }

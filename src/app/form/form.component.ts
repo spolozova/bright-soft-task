@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Content, User, UsersService, Channel } from '../shared/users.service';
+import { User, UsersService, Data } from '../shared/users.service';
 
 
 @Component({
@@ -14,10 +14,12 @@ export class FormComponent implements OnInit {
     favorite_content_id: [],
   };
 
-  @Input() users: User[] = [];
+  @Input() data: Data = {
+    users: [],
+    contents: [],
+    channels: [],
+  }
 
-  contents: Content[] = [];
-  channels: Channel[] = [];
   isSending: boolean = false;
   error: boolean = false;
   
@@ -25,19 +27,12 @@ export class FormComponent implements OnInit {
   constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this.usersService.getContents().subscribe((contents: Content[]) => {
-      this.contents = contents;
-    })
-    this.usersService.getTvChannels().subscribe((channels: Channel[]) => {
-      this.channels = channels;
-    })
   }
 
   onSubmit() {
     this.isSending = true;
-    this.usersService.addUser(this.user, this.contents, this.channels).subscribe((newUser) => {
-      console.log(newUser);
-      this.users.push(newUser);
+    this.usersService.addUser(this.user, this.data.contents, this.data.channels).subscribe((newUser) => {
+      this.data.users.push(newUser);
     },
     () => {this.error = true;} 
     )

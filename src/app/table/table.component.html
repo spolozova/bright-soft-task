@@ -10,7 +10,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users; index as i">
+            <tr *ngFor="let user of data.users; index as i">
               <th scope="row">{{ i + 1 }}</th>
               <td>{{ user.name }}</td>
               <td *ngIf="user.favorite_channels">{{ user.favorite_channels.join(', ') }}</td>
@@ -19,5 +19,5 @@
         </table>
       </div>
     </div>
-    <app-form [users]="users"></app-form>
+    <app-form [data]="data"></app-form>
   </div>

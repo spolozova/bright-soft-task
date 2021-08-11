@@ -12,8 +12,8 @@ export interface User {
 
   export interface Content {
     name: string,
-    favorite_content_id: number
-    channel_id: number
+    favorite_content_id: number,
+    channel_id: number,
   }
 
   export interface Channel {
@@ -21,6 +21,11 @@ export interface User {
     channel_id: number,
   }
 
+  export interface Data {
+    users: User[],
+    contents: Content[],
+    channels: Channel[],
+  }
 
   @Injectable({
     providedIn: 'root'
@@ -80,7 +85,7 @@ export interface User {
     }
 
      
-     addUser(user: User, contents: Content[], channels: Channel[]): Observable<any> {
+     addUser(user: any, contents: Content[], channels: Channel[]): Observable<any> {
      return this.httpClient.post<any>('https://reqres.in/api/users', user).pipe(map(({ name, favorite_content_id }) => {
        const favorite_channels = this.findFavoriteChannels({ name, favorite_content_id }, contents, channels)
        return { name, favorite_content_id, favorite_channels}
