@@ -20,13 +20,6 @@ export interface User {
     name: string,
     channel_id: number,
   }
-
-  export interface Data {
-    users: User[],
-    contents: Content[],
-    channels: Channel[],
-  }
-
   @Injectable({
     providedIn: 'root'
   })
@@ -73,6 +66,13 @@ export interface User {
      return this.httpClient.get<any[]>('/assets/tv_channels.json');
    }
 
+   getData(): Observable<object> {
+    return forkJoin([this.getUsers(), this.getContents(), this.getTvChannels()])
+    .pipe((map(([users, contents, channels]: [User[], Content[], Channel[]]) => {
+      return { users, contents, channels }
+ })))
+};
+
    getUsers(): Observable<User[]> {
      return forkJoin([this.loadUsers(), this.getContents(), this.getTvChannels()])
      .pipe(map(([users, content, channels]: [User[], Content[], Channel[]]) => {
@@ -84,7 +84,6 @@ export interface User {
       );
     }
 
-     
      addUser(user: any, contents: Content[], channels: Channel[]): Observable<any> {
      return this.httpClient.post<any>('https://reqres.in/api/users', user).pipe(map(({ name, favorite_content_id }) => {
        const favorite_channels = this.findFavoriteChannels({ name, favorite_content_id }, contents, channels)

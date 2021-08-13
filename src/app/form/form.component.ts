@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User, UsersService, Data } from '../shared/users.service';
+import { User, UsersService } from '../shared/users.service';
 
 
 @Component({
@@ -14,11 +14,7 @@ export class FormComponent implements OnInit {
     favorite_content_id: [],
   };
 
-  @Input() data: Data = {
-    users: [],
-    contents: [],
-    channels: [],
-  }
+  @Input() data: any = null;
 
   isSending: boolean = false;
   error: boolean = false;

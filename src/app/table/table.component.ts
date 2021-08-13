@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Data } from '../shared/users.service';
 
 
 @Component({
@@ -9,11 +8,7 @@ import { Data } from '../shared/users.service';
 })
 
 export class TableComponent implements OnInit {
-  @Input() data: Data = {
-    users: [],
-    contents: [],
-    channels: [],
-  }
+  @Input() data: any;
 
   ngOnInit(): void {
   }

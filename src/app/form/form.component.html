@@ -1,4 +1,4 @@
-<div class="row d-flex justify-content-center bd-highlight">
+<div *ngIf="data" class="row d-flex justify-content-center bd-highlight">
   <form class="col-6 text-center border border-primar needs-validation" (ngSubmit)="onSubmit()" #form="ngForm">
   <h5 class="my-4">Добавить пользователя</h5>
   <div class="d-flex justify-content-center bd-highlight row mb-3">
